@@ -6,13 +6,13 @@ without systemd. This is done because some developers write code as if
 only systemd is out there and no other operating sytem or init system exists.
 
 ## Installation
-
+```
 $ sudo make install
-
+```
 ## Removal
-
+```
 $ sudo make uninstall
-
+```
 ## Usage
 
 Any program that tries to call ``systemctl`` will now use openrc instead.
