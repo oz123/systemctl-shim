@@ -1,31 +1,58 @@
+#!/bin/sh
 CMD=rc-service
 
+SERVICE=${2%".service"}
+
 case "$1" in
-	start)
-		"${CMD}" "$2" start
+        start)
+                "${CMD}" "$SERVICE" start
         ;;
 
     stop)
-		"${CMD}" "$2" stop
+                "${CMD}" "$SERVICE" stop
         ;;
 
     status)
-		"${CMD}" "$2" status
+                "${CMD}" "$SERVICE" status
         ;;
 
     restart)
-		"${CMD}" "$2" restart
+                "${CMD}" "$SERVICE" restart
         ;;
 
     enable)
-        rc-update add "$2" default
+        rc-update add "$SERVICE" default
         ;;
 
     disable)
-        rc-update del "$2" default
+        rc-update del "$SERVICE" default
         ;;
+
+    is-enabled)
+        ENABLED=`rc-update show | grep " $SERVICE " | wc -l`
+        if [ $ENABLED == "1" ]
+        then
+            echo enabled
+        else
+            echo disabled
+        fi
+        ;;
+
+    is-active)
+        ACTIVE=`rc-status | grep " $SERVICE .* started " | wc -l`
+        if [ $ACTIVE == "1" ]
+        then
+            echo active
+        else
+            echo inactive
+        fi
+        ;;
+
+    daemon-reload)
+        ;;
+
     *)
-        echo $"Usage: $0 {start|stop|status|restart}"
+        echo $"Usage: $0 {start|stop|status|restart|enable|disable|is-enabled|is-active}"
         exit 1
 
 esac
