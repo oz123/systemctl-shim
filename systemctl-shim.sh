@@ -29,7 +29,7 @@ case "$1" in
         ;;
 
     is-enabled)
-        ENABLED=`rc-update show | grep " $SERVICE " | wc -l`
+        ENABLED="$(rc-update show | grep " $SERVICE " | wc -l)"
         if [ $ENABLED == "1" ]
         then
             echo enabled
@@ -39,7 +39,7 @@ case "$1" in
         ;;
 
     is-active)
-        ACTIVE=`rc-status | grep " $SERVICE .* started " | wc -l`
+        ACTIVE="$(rc-status | grep " $SERVICE .* started " | wc -l)"
         if [ $ACTIVE == "1" ]
         then
             echo active
