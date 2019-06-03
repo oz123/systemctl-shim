@@ -4,20 +4,20 @@ CMD=rc-service
 SERVICE=${2%".service"}
 
 case "$1" in
-        start)
-                "${CMD}" "$SERVICE" start
+    start)
+        "${CMD}" "$SERVICE" start
         ;;
 
     stop)
-                "${CMD}" "$SERVICE" stop
+        "${CMD}" "$SERVICE" stop
         ;;
 
     status)
-                "${CMD}" "$SERVICE" status
+        "${CMD}" "$SERVICE" status
         ;;
 
     restart)
-                "${CMD}" "$SERVICE" restart
+        "${CMD}" "$SERVICE" restart
         ;;
 
     enable)
