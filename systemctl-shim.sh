@@ -4,20 +4,20 @@ CMD=rc-service
 SERVICE=${2%".service"}
 
 case "$1" in
-        start)
-                "${CMD}" "$SERVICE" start
+    start)
+        "${CMD}" "$SERVICE" start
         ;;
 
     stop)
-                "${CMD}" "$SERVICE" stop
+        "${CMD}" "$SERVICE" stop
         ;;
 
     status)
-                "${CMD}" "$SERVICE" status
+        "${CMD}" "$SERVICE" status
         ;;
 
     restart)
-                "${CMD}" "$SERVICE" restart
+        "${CMD}" "$SERVICE" restart
         ;;
 
     enable)
@@ -29,8 +29,8 @@ case "$1" in
         ;;
 
     is-enabled)
-        ENABLED=`rc-update show | grep " $SERVICE " | wc -l`
-        if [ $ENABLED == "1" ]
+        ENABLED="$(rc-update show | grep " $SERVICE " | wc -l)"
+        if [ $ENABLED -eq "1" ]
         then
             echo enabled
         else
@@ -39,8 +39,8 @@ case "$1" in
         ;;
 
     is-active)
-        ACTIVE=`rc-status | grep " $SERVICE .* started " | wc -l`
-        if [ $ACTIVE == "1" ]
+        ACTIVE="$(rc-status | grep " $SERVICE .* started " | wc -l)"
+        if [ $ACTIVE -eq "1" ]
         then
             echo active
         else
